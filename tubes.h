@@ -6,12 +6,13 @@ using namespace std;
 
 #define nextKaryawan(P) P->nextKaryawan
 #define prevKaryawan(P) P->prevKaryawan
-#define firstKaryawan(L) L.firstKaryawan
-#define lastKaryawan(L) L.lastKaryawan
+#define firstKaryawan(L) L.first
+#define lastKaryawan(L) L.last
 #define infoKaryawan(P) P->infoKaryawan
 #define nextProjek(P) P->nextProjek
 #define infoProjek(P) P->infoProjek
 #define firstProjek(L) L.firstProjek
+#define firstKaryawanProjek(L) L.firstKaryawan
 
 struct karyawan {
     int ID_karyawan;
@@ -62,10 +63,10 @@ void showAllProjek(listProjek LP);
 void deleteProjekDanKaryawan(listProjek &LP, int ID_projek);
 adr_projek searchProjek(listProjek LP, int ID_projek);
 void insertLastKaryawan(listKaryawan &LK, adr_karyawan K);
-void connectProjekToKaryawan(listProjek &LP, listKaryawan LK);
+void connectProjekToKaryawan(listProjek &LP, listKaryawan LK, string ID_projek);
 void showAllProjekAndKaryawan(listProjek LP);
-adr_karyawan searchKaryawan(int ID_karyawan, int ID_projek);
-void deleteKaryawan(int ID_karyawan, int ID_projek);
+adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan, listProjek LP, int ID_projek);
+void deleteKaryawan(listKaryawan &LK, listProjek LP, int ID_projek);
 int countKaryawanInProjek(int ID_projek);
 
 

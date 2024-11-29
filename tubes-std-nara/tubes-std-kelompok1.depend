@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1732884054 source:c:\kuliah\semester 3\struktur data\tugas besar\tubes-std-nara\tubes-std-nara\main.cpp
+	"tubes.h"
+
+1732895569 c:\kuliah\semester 3\struktur data\tugas besar\tubes-std-nara\tubes-std-nara\tubes.h
+	<iostream>
+

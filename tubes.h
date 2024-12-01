@@ -66,7 +66,7 @@ void insertLastKaryawan(listKaryawan &LK, adr_karyawan K);
 void connectProjekToKaryawan(listProjek &LP, listKaryawan LK, string ID_projek);
 void showAllProjekAndKaryawan(listProjek LP);
 adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan, listProjek LP, int ID_projek);
-void deleteKaryawan(listKaryawan &LK, listProjek LP, int ID_projek);
+void deleteKaryawan(listProjek LP, int ID_projek);
 int countKaryawanInProjek(int ID_projek);
 
 

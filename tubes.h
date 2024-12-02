@@ -11,8 +11,8 @@ using namespace std;
 #define infoKaryawan(P) P->infoKaryawan
 #define nextProjek(P) P->nextProjek
 #define infoProjek(P) P->infoProjek
-#define firstProjek(L) L.firstProjek
-#define firstKaryawanProjek(L) L.firstKaryawan
+#define firstProjek(L) L.first
+#define dataKaryawan(P) P->dataKaryawan
 
 struct karyawan {
     int ID_karyawan;
@@ -36,21 +36,10 @@ typedef karyawan infotype_karyawan;
 typedef struct elmProjek *adr_projek;
 typedef struct elmKaryawan *adr_karyawan;
 
-
-struct elmProjek {
-    infotype_projek infoProjek;
-    adr_projek nextProjek;
-    adr_karyawan firstKaryawan;
-};
-
 struct elmKaryawan {
     infotype_karyawan infoKaryawan;
     adr_karyawan prevKaryawan;
     adr_karyawan nextKaryawan;
-};
-
-struct listProjek {
-    adr_projek first;
 };
 
 struct listKaryawan {
@@ -58,16 +47,31 @@ struct listKaryawan {
     adr_karyawan last;
 };
 
+struct elmProjek {
+    infotype_projek infoProjek;
+    adr_projek nextProjek;
+    listKaryawan dataKaryawan;
+};
+
+struct listProjek {
+    adr_projek first;
+};
+
+void createListProjek(listProjek &LP);
+void createListKaryawan(listKaryawan &LK);
+adr_projek allocateProjek(infotype_projek dataProjek);
+adr_karyawan allocateKaryawan(infotype_karyawan dataKaryawan);
+
 void insertFirstProjek(listProjek &LP, adr_projek P);
 void showAllProjek(listProjek LP);
-void deleteProjekDanKaryawan(listProjek &LP, int ID_projek);
+void deleteProjekDanKaryawan(listProjek &LP);
 adr_projek searchProjek(listProjek LP, int ID_projek);
 void insertLastKaryawan(listKaryawan &LK, adr_karyawan K);
-void connectProjekToKaryawan(listProjek &LP, listKaryawan LK, string ID_projek);
+void connectProjekToKaryawan(listProjek &LP, int ID_projek, adr_karyawan K);
 void showAllProjekAndKaryawan(listProjek LP);
-adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan, listProjek LP, int ID_projek);
-void deleteKaryawan(listProjek LP, int ID_projek);
-int countKaryawanInProjek(int ID_projek);
+adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan);
+void deleteKaryawan(listKaryawan &LK);
+int countKaryawanInProjek(listProjek LP, int ID_projek);
 
 
 

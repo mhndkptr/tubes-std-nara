@@ -149,20 +149,6 @@ void connectProjekToKaryawan(listProjek &LP, int ID_projek, adr_karyawan K) {
     listProjek dengan ID_projek
     }
     */
-    /*
-    if(firstProjek(LP) == NULL) {
-        cout << "Projek Kosong" << endl;
-    } else if(firstKaryawan(LK) == NULL) {
-        cout << "Karyawan Kosong" << endl;
-    } else {
-        adr_projek = searchProjek(LP, ID_projek);
-        if(adr_projek == NULL) {
-            cout << "Data projek tidak ditemukan."
-        } else {
-            firstKaryawanProjek(LP) = firstKaryawan(LK);
-        }
-    }
-    */
 
     adr_projek P = searchProjek(LP, ID_projek);
     if (P != NULL) {
@@ -240,7 +226,7 @@ adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan) {
 void deleteKaryawan(listKaryawan &LK) {
     /*
     { I.S.: listProjek LP mungkin kosong
-    F.S.: Data karyawan terakhir terhapus pada data projek tertentu
+    F.S.: Data karyawan pertama terhapus pada data projek tertentu
     }
     */
     if (firstKaryawan(LK) == NULL) {

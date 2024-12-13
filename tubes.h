@@ -2,7 +2,12 @@
 #define TUBES_H_INCLUDED
 
 #include <iostream>
+#include <vector>
 using namespace std;
+
+#ifdef _WIN32
+#include <bits/stdc++.h>
+#endif
 
 #define nextKaryawan(P) P->nextKaryawan
 #define prevKaryawan(P) P->prevKaryawan
@@ -72,8 +77,24 @@ void showAllProjekAndKaryawan(listProjek LP);
 adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan);
 void deleteKaryawan(listKaryawan &LK);
 int countKaryawanInProjek(listProjek LP, int ID_projek);
+adr_projek searchKaryawanInAllProjek(listProjek LP, int ID_karyawan);
 
+// Utils
+void clearScreen();
+void pause();
+int intInput(string prompt);
+void tableHorizontalSparator(vector<int> colWidth);
+void tableRow(vector<int> colWidth, vector<string> data);
+vector<int> colWidth(vector<vector<string>> &t);
+void table(vector<vector<string>> &t);
+void inisialisasi_data_perusahaan(listProjek &LP);
 
-
+// Menu
+void menu_welcome();
+void menu(listProjek &LP);
+void list_menu_utama();
+void headerMenu(string title, string subtitle);
+void menu_input_projek(listProjek &LP);
+void menu_input_karyawan(listProjek &LP);
 
 #endif // TUBES_H_INCLUDED

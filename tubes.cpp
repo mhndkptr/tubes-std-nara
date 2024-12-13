@@ -53,19 +53,17 @@ void showAllProjek(listProjek LP) {
     } else {
         adr_projek P = firstProjek(LP);
         int i = 1;
-        cout << "Data Projek: " << endl;
         cout << endl;
+
+        vector<vector<string>> t;
+        t.push_back({"NO","ID","NAMA", "KATEGORI", "TANGGAL MULAI", "TANGGAL SELESAI"});
         while(P != NULL) {
-            cout << "Data projek ke-" << i << ": " << endl;
-            cout << "ID Projek: " << infoProjek(P).ID_projek << endl;
-            cout << "Nama Projek: " << infoProjek(P).nama_projek << endl;
-            cout << "Kategori Projek: " << infoProjek(P).kategori_projek << endl;
-            cout << "Tanggal Mulai Projek: " << infoProjek(P).tanggal_mulai_projek << endl;
-            cout << "Tanggal Selesai Projek: " << infoProjek(P).tanggal_selesai_projek << endl;
-            cout << endl;
+            t.push_back({to_string(i), to_string(infoProjek(P).ID_projek), infoProjek(P).nama_projek, infoProjek(P).kategori_projek, infoProjek(P).tanggal_mulai_projek, infoProjek(P).tanggal_selesai_projek});
             P = nextProjek(P);
             i++;
         }
+
+        table(t);
     }
 }
 
@@ -80,10 +78,19 @@ void deleteProjekDanKaryawan(listProjek &LP) {
         cout << "Projek Kosong" << endl;
     } else {
         adr_projek P = firstProjek(LP);
-        while (nextProjek(P) != NULL) {
-            P = nextProjek(P);
+        adr_projek prevP;
+        if(nextProjek(P) == NULL) {
+            prevP = NULL;
+        } else {
+            prevP = P;
+            while (nextProjek(nextProjek(prevP)) != NULL) {
+                prevP = nextProjek(prevP);
+            }
+            P = nextProjek(prevP);
         }
+
         adr_karyawan K = firstKaryawan(dataKaryawan(P));
+
         if (K == NULL) {
             cout << "Karyawan Tidak Ada" << endl;
         } else {
@@ -91,16 +98,15 @@ void deleteProjekDanKaryawan(listProjek &LP) {
                 deleteKaryawan(dataKaryawan(P));
             }
         }
-        if (nextProjek(P) == NULL) {
+
+        if(prevP == NULL) {
             adr_projek tempP = P;
             firstProjek(LP) = NULL;
         } else {
-            while(nextProjek(nextProjek(P)) != NULL) {
-                P = nextProjek(P);
-            }
             adr_projek tempP = P;
-            nextProjek(P) = NULL;
+            nextProjek(prevP) = NULL;
         }
+        cout << "Projek terakhir berhasil dihapus" << endl;
     }
     cout << endl;
 }
@@ -112,7 +118,6 @@ adr_projek searchProjek(listProjek LP, int ID_projek) {
     }
     */
     if(firstProjek(LP) == NULL) {
-        cout << "Projek Kosong" << endl;
         return NULL;
     } else {
         adr_projek P = firstProjek(LP);
@@ -170,36 +175,38 @@ void showAllProjekAndKaryawan(listProjek LP) {
         cout << "Projek Kosong" << endl;
         cout << endl;
     }
+    cout << endl;
     while (P != NULL) {
-        cout << "Data projek ke-" << countProjek << ": " << endl;
-        cout << "ID Projek: " << infoProjek(P).ID_projek << endl;
-        cout << "Nama Projek: " << infoProjek(P).nama_projek << endl;
-        cout << "Kategori Projek: " << infoProjek(P).kategori_projek << endl;
-        cout << "Tanggal Mulai Projek: " << infoProjek(P).tanggal_mulai_projek << endl;
-        cout << "Tanggal Selesai Projek: " << infoProjek(P).tanggal_selesai_projek << endl;
-        cout << "Karyawan untuk Projek ID: " << infoProjek(P).ID_projek << endl;
+        string projekKe = "Data projek ke-" + to_string(countProjek);
+        headerMenu(projekKe, "");
+        cout << "ID Projek\t\t: " << infoProjek(P).ID_projek << endl;
+        cout << "Nama Projek\t\t: " << infoProjek(P).nama_projek << endl;
+        cout << "Kategori Projek\t\t: " << infoProjek(P).kategori_projek << endl;
+        cout << "Tanggal Mulai Projek\t: " << infoProjek(P).tanggal_mulai_projek << endl;
+        cout << "Tanggal Selesai Projek\t: " << infoProjek(P).tanggal_selesai_projek << endl;
         cout << endl;
+        cout << "Data Karyawan:" << endl;
         countProjek++;
 
         adr_karyawan K = firstKaryawan(dataKaryawan(P));
         if (K == NULL) {
             cout << "Tidak ada karyawan untuk projek ini." << endl;
-            cout << endl;
         } else {
             int i = 1;
+            vector<vector<string>> t;
+            t.push_back({"NO","ID","NAMA", "TANGGAL LAHIR", "ALAMAT", "NO TELP", "EMAIL"});
             while (K != NULL) {
-                cout << "Data karyawan ke-" << i++ << ": " << endl;
-                cout << "ID Karyawan: " << infoKaryawan(K).ID_karyawan << endl;
-                cout << "Nama Karyawan: " << infoKaryawan(K).nama_karyawan << endl;
-                cout << "Tanggal Lahir Karyawan: " << infoKaryawan(K).tanggal_lahir << endl;
-                cout << "Alamat Karyawan: " << infoKaryawan(K).alamat_karyawan << endl;
-                cout << "No Telp Karyawan: " << infoKaryawan(K).no_telp_karyawan << endl;
-                cout << "Email Karyawan: " << infoKaryawan(K).email_karyawan << endl;
-                cout << endl;
+                t.push_back({to_string(i), to_string(infoKaryawan(K).ID_karyawan), infoKaryawan(K).nama_karyawan, infoKaryawan(K).tanggal_lahir, infoKaryawan(K).alamat_karyawan, infoKaryawan(K).no_telp_karyawan, infoKaryawan(K).email_karyawan});
+                i++;
                 K = nextKaryawan(K);
             }
+
+            table(t);
+
         }
         P = nextProjek(P);
+
+        cout << "=================================================" << endl;
     }
 
 }
@@ -212,7 +219,6 @@ adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan) {
     }
     */
     if(firstKaryawan(LK) == NULL) {
-        cout << "Data karyawan pada projek ini kosong" << endl;
         return NULL;
     } else {
         adr_karyawan K = firstKaryawan(LK);
@@ -220,6 +226,22 @@ adr_karyawan searchKaryawan(listKaryawan LK, int ID_karyawan) {
             K = nextKaryawan(K);
         }
         return K;
+    }
+}
+
+adr_projek searchKaryawanInAllProjek(listProjek LP, int ID_karyawan) {
+    if(firstProjek(LP) == NULL) {
+        return NULL;
+    } else {
+        adr_projek P = firstProjek(LP);
+        while(P != NULL) {
+            adr_karyawan K = searchKaryawan(dataKaryawan(P), ID_karyawan);
+            if(K != NULL) {
+                return P;
+            }
+            P = nextProjek(P);
+        }
+        return NULL;
     }
 }
 
@@ -236,6 +258,7 @@ void deleteKaryawan(listKaryawan &LK) {
         adr_karyawan tempK = K;
         firstKaryawan(LK) = nextKaryawan(firstKaryawan(LK));
         nextKaryawan(tempK) = NULL;
+        cout << "Data karyawan berhasil dihapus" << endl;
     }
 }
 

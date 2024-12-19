@@ -133,6 +133,9 @@ void menu(listProjek &LP) {
                 cout << "Projek tidak ditemukan" << endl;
             } else {
                 cout << endl;
+                if(firstKaryawan(dataKaryawan(P)) != NULL) {
+                    cout << "Karyawan pertama pada projek pertama (ID: " << ID_projek << ") berhasil di hapus" << endl;
+                }
                 deleteKaryawan(dataKaryawan(P));
             }
             cout << endl;
@@ -154,7 +157,7 @@ void menu_welcome() {
     cout << "*    Di Aplikasi Manajemen Projek & Karyawan    *" << endl;
     cout << "*                  By Kelompok 1                *" << endl;
     cout << "*     Muhammad Hendika Putra - 103012300116     *" << endl;
-    cout << "*       Fazari Razka Davira - 10301230031       *" << endl;
+    cout << "*       Fazari Razka Davira - 103012300317      *" << endl;
     cout << "=================================================" << endl;
 
     cout << endl;

@@ -138,12 +138,12 @@ void insertLastKaryawan(listKaryawan &LK, adr_karyawan K) {
     */
     if (firstKaryawan(LK) == NULL) {
         firstKaryawan(LK) = K;
-    }else {
-        adr_karyawan Q = firstKaryawan(LK);
-        while (nextKaryawan(Q) != NULL) {
-            Q = nextKaryawan(Q);
-        }
+        lastKaryawan(LK) = K;
+    } else {
+        adr_karyawan Q = lastKaryawan(LK);
         nextKaryawan(Q) = K;
+        prevKaryawan(K) = Q;
+        lastKaryawan(LK) = K;
     }
 }
 
@@ -253,12 +253,15 @@ void deleteKaryawan(listKaryawan &LK) {
     */
     if (firstKaryawan(LK) == NULL) {
         cout << "Karyawan Tidak Ada" << endl;
+    } else if(firstKaryawan(LK) == lastKaryawan(LK)) {
+        adr_karyawan tempK = firstKaryawan(LK);
+        firstKaryawan(LK) = NULL;
+        lastKaryawan(LK) = NULL;
     } else {
-        adr_karyawan K = firstKaryawan(LK);
-        adr_karyawan tempK = K;
+        adr_karyawan tempK = firstKaryawan(LK);
         firstKaryawan(LK) = nextKaryawan(firstKaryawan(LK));
+        prevKaryawan(firstKaryawan(LK)) = NULL;
         nextKaryawan(tempK) = NULL;
-        cout << "Data karyawan berhasil dihapus" << endl;
     }
 }
 
